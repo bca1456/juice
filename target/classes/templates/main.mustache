@@ -1,7 +1,17 @@
 <html>
-
-<body>
-    <div> Hello, chlen {{kek}}</div>
-</body>
-
+    <body>
+        <div>
+            <form method="post">
+                <input type="text" name="name" placeholder="Введите имя">
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
+        <div> Список пользователей</div>
+        {{#users}}
+        <div>
+            <b>{{id}}</b>
+            <span>{{name}}</span>
+        </div>
+        {{/users}}
+    </body>
 </html>
