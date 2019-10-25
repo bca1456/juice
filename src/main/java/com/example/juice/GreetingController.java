@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class GreetingController {
@@ -25,20 +27,28 @@ public class GreetingController {
 
     @GetMapping
     public String main(Map<String, Object> model){
-        Iterable<User> users = userRepository.findAll();
-        model.put("users", users);
+        Iterable<User> users = userRepository.findAll();  // получаем список всех пользователей
+        model.put("users", users); //добавляем в модель
         return "main";
     }
 
     @PostMapping
     public String addNewUser(@RequestParam String name, Map<String, Object> model){
         User user = new User(name);
+        System.out.println("/////////////////////////////////////////////////////////////////////");
         userRepository.save(user); //сохраняем пользователя
 
         Iterable<User> users = userRepository.findAll(); //опять чекнули все из репы
         model.put("users", users); //положили обновленную репу в модель
 
-        return "added";
+        return "main";
     }
 
+    @PostMapping("idFilter")
+    public String idFilter(@RequestParam Integer userID, Map<String, Object> model){
+        Optional<User> users = userRepository.findById(userID);
+
+        model.put("users", users);
+        return "main";
+    }
 }

@@ -7,6 +7,10 @@
             </form>
         </div>
         <div> Список пользователей</div>
+        <form method="post" action="idFilter">
+            <input type="number" name="userID" placeholder="Введите ID">
+            <button type="submit">Поиск</button>
+        </form>
         {{#users}}
         <div>
             <b>{{id}}</b>
