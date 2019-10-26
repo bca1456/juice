@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -47,8 +48,8 @@ public class GreetingController {
     @PostMapping("idFilter")
     public String idFilter(@RequestParam Integer userID, Map<String, Object> model){
         Optional<User> users = userRepository.findById(userID);
-
-        model.put("users", users);
+        Iterable<User> q = Arrays.asList(new User("dadaya", 666));
+        model.put("users", q);
         return "main";
     }
 }
