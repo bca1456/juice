@@ -1,21 +1,29 @@
 <html>
     <body>
-        <div> Список пользователей</div>
+        <div>
+            <form action="/logout" method="post">
+                <input type="hidden" name="_csrf" value={{_csrf.token}} />
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+        <div> Список книг</div>
         <div>
             <form method="post">
-                <input type="text" name="name" placeholder="Введите имя">
+                <input type="text" name="name" placeholder="Введите название">
+                <input type="hidden" name="_csrf" value={{_csrf.token}} />
                 <button type="submit">Добавить</button>
             </form>
         </div>
         <form method="post" action="idFilter">
-            <input type="number" name="userID" placeholder="Введите ID">
+            <input type="number" name="bookID" placeholder="Введите ID">
+            <input type="hidden" name="_csrf" value={{_csrf.token}} />
             <button type="submit">Поиск</button>
         </form>
-        {{#users}}
+        {{#books}}
         <div>
             <b>{{id}}</b>
             <span>{{name}}</span>
         </div>
-        {{/users}}
+        {{/books}}
     </body>
 </html>
