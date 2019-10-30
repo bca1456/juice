@@ -16,10 +16,10 @@ public class MainController {
     @Autowired
     private BookRepository bookRepository;
 
-    @GetMapping("/")
-    public String greeting(Map<String, Object> model) {
-        return "greeting";
-    }
+//    @GetMapping("/")
+//    public String greeting(Map<String, Object> model) {
+//        return "greeting";
+//    }
 
     @GetMapping("/books")
     public List<Book> getBooks() {
