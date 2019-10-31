@@ -13,7 +13,7 @@ describe('BookFormComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach( () => {
     fixture = TestBed.createComponent(BookFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
