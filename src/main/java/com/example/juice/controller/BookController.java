@@ -2,6 +2,8 @@ package com.example.juice.controller;
 
 import com.example.juice.domain.Book;
 import com.example.juice.repos.BookRepository;
+import com.example.juice.service.BookService;
+import com.example.juice.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ import java.util.*;
 @Controller
 public class BookController {
     @Autowired
-    private BookRepository bookRepository;
+    private BookServiceImpl bookService;
 
 //    @ExceptionHandler(Exception.class)
 //    public ResponseEntity<Object> handle(Exception ex,
@@ -31,13 +33,23 @@ public class BookController {
 //    }
 
     @GetMapping("/books")
-    public @ResponseBody List<Book> getBooks() {
-        return (List<Book>) bookRepository.findAll();
+    public @ResponseBody List<Book> allBooks() {
+        return bookService.getAll();
     }
 
     @PostMapping("/books")
-    public @ResponseBody void addUser(@RequestBody Book book) {
-        bookRepository.save(book);
+    public @ResponseBody void addBook(@RequestBody Book book) {
+        bookService.addBook(book);
+    }
+
+    @GetMapping("/books/{book_id}")
+    public @ResponseBody Book getBookById(@PathVariable("book_id") long book_id, Book book){
+        return bookService.getBookById(book_id);
+    }
+
+    @DeleteMapping("/book/del-book/{book_id}")
+    public void deleteBook(@PathVariable("book_id") long book_id, Book book){
+        bookService.delete(book_id);
     }
 
 //    @PostMapping("idFilter")
