@@ -1,16 +1,18 @@
 <div class="card my-5">
   <div class="card-body">
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered">
       <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
+        <th scope="col"></th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let book of books">
         <td>{{ book.id }}</td>
         <td>{{ book.name }}</td>
+        <td><button class="btn btn-danger" (click)="deleteBook(book)">del</button></td>
       </tr>
       </tbody>
     </table>

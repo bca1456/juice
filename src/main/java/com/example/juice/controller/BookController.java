@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
+@CrossOrigin(origins="http://localhost:4200")
 @Controller
 public class BookController {
     @Autowired
@@ -43,12 +44,12 @@ public class BookController {
     }
 
     @GetMapping("/books/{book_id}")
-    public @ResponseBody Book getBookById(@PathVariable("book_id") long book_id, Book book){
+    public @ResponseBody Book getBookById(@PathVariable("book_id") int book_id){
         return bookService.getBookById(book_id);
     }
 
-    @DeleteMapping("/book/del-book/{book_id}")
-    public void deleteBook(@PathVariable("book_id") long book_id, Book book){
+    @DeleteMapping("/books/{book_id}")
+    public @ResponseBody void deleteBook(@PathVariable("book_id") int book_id){
         bookService.delete(book_id);
     }
 

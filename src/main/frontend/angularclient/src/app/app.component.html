@@ -1,10 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="card bg-dark my-5">
-        <div class="card-body">
-          <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
-          <ul class="text-center list-inline py-3">
+      <div class="card bg-dark">
+          <h2 class="card-title text-center text-white">{{ title }}</h2>
+          <ul class="text-center list-inline">
             <li class="list-inline-item">
               <a routerLink="/books" class="btn btn-info">List Books</a>
             </li>
@@ -12,7 +11,6 @@
               <a routerLink="/addbook" class="btn btn-info">Add Book</a>
             </li>
           </ul>
-        </div>
       </div>
       <router-outlet></router-outlet>
     </div>
