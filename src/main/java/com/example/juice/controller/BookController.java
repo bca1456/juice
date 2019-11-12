@@ -35,6 +35,9 @@ public class BookController {
 
     @GetMapping("/books")
     public @ResponseBody List<Book> allBooks() {
+        System.out.println("================");
+        bookService.getAll().forEach(System.out::println);
+        System.out.println("================");
         return bookService.getAll();
     }
 
@@ -53,6 +56,10 @@ public class BookController {
         bookService.delete(book_id);
     }
 
+    @PutMapping("/books")
+    public @ResponseBody void updateBook(@RequestBody Book book){
+        bookService.updateBook(book);
+    }
 //    @PostMapping("idFilter")
 //    public String idFilter(@RequestParam Integer bookID, Map<String, Object> model){
 //        Iterable<Book> books;

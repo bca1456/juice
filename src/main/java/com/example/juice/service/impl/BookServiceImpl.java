@@ -30,8 +30,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book editBook(Book book) {
-        return bookRepository.save(book);
+    public Book updateBook(Book book) {
+        Book newBook = new Book(book.getName(), book.getId());
+        this.delete(book.getId());
+        return bookRepository.save(newBook);
     }
 
     @Override

@@ -1,5 +1,6 @@
 <div class="card my-5">
   <div class="card-body">
+    <button class="btn btn-warning float-right" >add</button>
     <table class="table table-bordered">
       <thead class="thead-dark">
       <tr>
@@ -10,11 +11,42 @@
       </thead>
       <tbody>
       <tr *ngFor="let book of books">
-        <td>{{ book.id }}</td>
-        <td>{{ book.name }}</td>
-        <td><button class="btn btn-danger" (click)="deleteBook(book)">del</button></td>
+          <ng-template [ngTemplateOutlet]="loadTemplate(book)"
+                        [ngTemplateOutletContext]="{ $implicit:book}">
+                        <!-- А свойство ngTemplateOutletContext для передачи контекста в шаблон. С помощью параметра $implicit задается передаваемый объект. В данном случае это объект book. -->
+          </ng-template>
       </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<!-- Шаблон для чтения -->
+<ng-template #readOnlyTemp let-book>
+  <td>{{ book.id }}</td>
+  <td>{{ book.name }}</td>
+  <td>
+    <button class="btn btn-info" (click)="updateBook(book)">update</button>
+    <button class="btn btn-danger" (click)="deleteBook(book)">del</button>
+  </td>
+</ng-template>
+
+<!--шаблон для редактирования-->
+<ng-template #editTemp>
+  <td>
+    <label>
+      <input type="text" [(ngModel)]="editedBook.id" readonly disabled class="form-control" />
+    </label>
+  </td>
+  <td>
+    <label>
+      <input type="text" [(ngModel)]="editedBook.name" class="form-control" />
+    </label>
+  </td>
+  <td>
+    <input type="button" value="Сохранить" (click)="saveBook()" class="btn btn-success" />
+  </td>
+  <td>
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+  </td>
+</ng-template>

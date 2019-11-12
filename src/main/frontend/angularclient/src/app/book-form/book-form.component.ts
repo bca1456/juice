@@ -17,11 +17,10 @@ export class BookFormComponent {
     private route: ActivatedRoute,
       private router: Router,
         private bookService: BookService) {
-    this.book = new Book();
   }
 
   onSubmit() {
-    this.bookService.save(this.book).subscribe(result => this.gotoBookList());
+    this.bookService.createBook(this.book).subscribe(result => this.gotoBookList());
   }
 
   gotoBookList() {
