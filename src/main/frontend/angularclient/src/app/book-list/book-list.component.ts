@@ -15,6 +15,11 @@ export class BookListComponent implements OnInit {
   //TemplateRef используется для создания вложенных представлений
   @ViewChild('readOnlyTemp') readOnlyTemp: TemplateRef<any>; //шаблон онли для просмотра
   @ViewChild('editTemp') editTemp: TemplateRef<any>; //шаблон для редактирования
+  // @ViewChild('addBookTemp') addBookTemp: TemplateRef<any>; //шаблон добавления книги
+  //
+  // showDialog(){
+  //   let view = this.addBookModa
+  // }
 
   constructor(private bookService: BookService) {
     this.books = new Array<Book>();
@@ -53,7 +58,7 @@ export class BookListComponent implements OnInit {
   // сохраняем книгу
   saveBook() {
     if (this.isNewRecord) {
-      // добавляем пользователя
+      // добавляем книгу
       this.bookService.createBook(this.editedBook).subscribe(data => {
           this.fetchData();
       });
@@ -75,7 +80,8 @@ export class BookListComponent implements OnInit {
       this.books.pop();
       this.isNewRecord = false;
     }
-    this.editedBook = null;
+    this.editedBook = null; //обнуляем изменяемую книгу
+    this.fetchData(); //получаем заново список
   }
 
   //удаление книги
@@ -84,7 +90,6 @@ export class BookListComponent implements OnInit {
           this.fetchData();
       });
   }
-
 
 
 

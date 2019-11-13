@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../service/book-service.service';
 import { Book } from '../model/book';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-book-form',
@@ -11,16 +12,20 @@ import { Book } from '../model/book';
 })
 export class BookFormComponent {
 
-  book: Book;
+  book: Book = new Book(1, "");
+  bookName: string;
 
   constructor(
-    private route: ActivatedRoute,
-      private router: Router,
+    private router: Router,
         private bookService: BookService) {
   }
 
-  onSubmit() {
-    this.bookService.createBook(this.book).subscribe(result => this.gotoBookList());
+  onSubmit(form: NgForm) {
+    this.bookService.createBook(this.book)
+      .subscribe(() => {
+          //alert("form: " + form +"   id: " + this.book.name + "  name:" + this.book.name);
+          this.gotoBookList()
+      });
   }
 
   gotoBookList() {

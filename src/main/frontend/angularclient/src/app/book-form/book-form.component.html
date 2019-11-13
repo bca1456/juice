@@ -1,19 +1,15 @@
 <div class="card my-5">
   <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #bookForm="ngForm">
+    <form #bookForm="ngForm" novalidate>
       <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" [(ngModel)]="book.name"
-               class="form-control"
-               id="name"
-               name="name"
-               placeholder="Enter book name"
-               required #name="ngModel">
+        <label>Name</label>
+        <label>
+          <input class="form-control" [(ngModel)]="book.name"
+                 name="name" placeholder="Enter book name" required />
+        </label>
       </div>
-      <div [hidden]="!name.pristine" class="alert alert-danger">Name is required</div>
-
-      <button type="submit" [disabled]="!bookForm.form.valid"
-              class="btn btn-info">Submit</button>
+      <!--div>Имя: {{bookForm.value.name}}</div-->
+      <button [disabled]="bookForm.invalid" type="submit" class="btn btn-info" (click)="onSubmit(bookForm)">Submit</button>
     </form>
   </div>
 </div>
