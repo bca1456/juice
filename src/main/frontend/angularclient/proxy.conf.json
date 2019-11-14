@@ -2,5 +2,9 @@
   "/books":{
     "target": "http://localhost:8080/books",
     "secure": false
+  },
+  "/cars": {
+    "target": "http://localhost:8080/cars",
+    "secure": false
   }
 }

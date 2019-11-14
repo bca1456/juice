@@ -2,6 +2,7 @@ package com.example.juice;
 
 import com.example.juice.domain.Book;
 import com.example.juice.repos.BookRepository;
+import com.example.juice.repos.CarRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,13 +18,14 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner init(BookRepository bookRepository) {
+    CommandLineRunner init(BookRepository bookRepository, CarRepository carRepository) {
         return args -> {
 //            Stream.of("John", "Julie", "Jennifer", "Helen", "Rachel").forEach(name -> {
 //                Book book = new Book(name);
 //                bookRepository.save(book);
 //            });
             bookRepository.findAll().forEach(System.out::println);
+            carRepository.findAll().forEach(System.out::println);
         };
     }
 }
