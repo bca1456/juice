@@ -1,6 +1,6 @@
 <div class="card my-5">
   <div class="card-body">
-    <form #bookForm="ngForm" novalidate>
+    <form #bookForm="ngForm">
       <div class="form-group">
         <label>Name</label>
         <label>
@@ -8,8 +8,37 @@
                  name="name" placeholder="Enter book name" required />
         </label>
       </div>
-      <!--div>Имя: {{bookForm.value.name}}</div-->
-      <button [disabled]="bookForm.invalid" type="submit" class="btn btn-info" (click)="onSubmit(bookForm)">Submit</button>
+      <button [disabled]="!bookForm.valid" type="submit" class="btn btn-info" (click)="onSubmit(bookForm)">Submit</button>
     </form>
+
+
+    <div class="card my-5">
+      <div class="card-body">
+        <h1>test</h1>
+          <form class="form-horizontal" [formGroup]="dadaFormGroup">
+            <label>firstName</label>
+            <label>
+              <input class="form-control" formControlName="firstName"/>
+            </label>
+            <br/>
+            <label>secondName</label>
+            <label>
+              <input class="form-control" formControlName="secondName"/>
+            </label>
+            <br/>
+            <label>email</label>
+            <label>
+              <input class="form-control" formControlName="email"/>
+            </label>
+            <br/>
+            <label>age</label>
+            <label>
+              <input class="form-control" formControlName="age"/>
+            </label>
+            <button type="submit" class="btn btn-primary" [disabled]="!dadaFormGroup.valid">Submit</button>
+          </form>
+      </div>
+    </div>
+
   </div>
 </div>

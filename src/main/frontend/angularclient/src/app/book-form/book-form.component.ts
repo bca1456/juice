@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../service/book-service.service';
 import { Book } from '../model/book';
-import {NgForm} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-book-form',
@@ -10,17 +10,31 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./book-form.component.css'],
   providers: [BookService]
 })
-export class BookFormComponent {
+export class BookFormComponent implements OnInit{
 
   book: Book = new Book(1, "");
   bookName: string;
 
+  dadaString: FormControl = new FormControl('q');
+  dadaFormGroup: FormGroup;
+
   constructor(
     private router: Router,
-        private bookService: BookService) {
+        private bookService: BookService,
+          private formBuilder: FormBuilder) {
+  }
+
+  ngOnInit(){
+    this.dadaFormGroup = this.formBuilder.group({
+      firstName: [null, [Validators.required, Validators.minLength(1)]],
+      secondName: [null, [Validators.required, Validators.minLength(1)]],
+      email: [null, [Validators.required, Validators.email]],
+      age: [null, [Validators.required, Validators.min(1), Validators.max(150)]]
+    });
   }
 
   onSubmit(form: NgForm) {
+    alert(this.dadaFormGroup.value.firstName);
     this.bookService.createBook(this.book)
       .subscribe(() => {
           //alert("form: " + form +"   id: " + this.book.name + "  name:" + this.book.name);
