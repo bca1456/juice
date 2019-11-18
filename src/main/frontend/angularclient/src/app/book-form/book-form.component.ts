@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BookService } from '../service/book-service.service';
-import { Book } from '../model/book';
+import {Router} from '@angular/router';
+import {BookService} from '../service/book-service.service';
+import {Book} from '../model/book';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 
 @Component({
@@ -26,11 +26,36 @@ export class BookFormComponent implements OnInit{
 
   ngOnInit(){
     this.dadaFormGroup = this.formBuilder.group({
-      firstName: [null, [Validators.required, Validators.minLength(1)]],
-      secondName: [null, [Validators.required, Validators.minLength(1)]],
-      email: [null, [Validators.required, Validators.email]],
-      age: [null, [Validators.required, Validators.min(1), Validators.max(150)]]
+      firstName: [null, [Validators.required,
+                          Validators.minLength(1),
+                          Validators.pattern(/^[A-z]/)]],
+      firstNameRus: [null, [Validators.required,
+                            Validators.minLength(1),
+                            Validators.pattern(/^[А-я]/)]],
+      secondName: [null, [Validators.required,
+                          Validators.minLength(1)]],
+      email: [null, [Validators.required,
+                      Validators.email]],
+      age: [null, [Validators.required,
+                    Validators.min(1),
+                    Validators.max(150),
+                    Validators.pattern(/^[0-9]/)]],
+      star: [null, [Validators.required,
+                    Validators.pattern(/[*]/)]]
     });
+  }
+
+  eshkere(){
+    // alert(this.dadaFormGroup.value.firstName  + " "
+    //   this.dadaFormGroup.value.secondName + " "
+    //   this.dadaFormGroup.value.email + " "
+    //   this.dadaFormGroup.value.age);
+  }
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.dadaFormGroup.controls[controlName];
+
+    return control.invalid && control.touched;
   }
 
   onSubmit(form: NgForm) {

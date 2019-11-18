@@ -20,6 +20,17 @@
             <label>
               <input class="form-control" formControlName="firstName"/>
             </label>
+            <div class="error" *ngIf="isControlInvalid('firstName')">
+              Only eng alphabet!
+            </div>
+            <br/>
+            <label>firstNameRus</label>
+            <label>
+              <input class="form-control" formControlName="firstNameRus"/>
+            </label>
+            <div class="error" *ngIf="isControlInvalid('firstNameRus')">
+              Only rus alphabet!
+            </div>
             <br/>
             <label>secondName</label>
             <label>
@@ -35,7 +46,19 @@
             <label>
               <input class="form-control" formControlName="age"/>
             </label>
-            <button type="submit" class="btn btn-primary" [disabled]="!dadaFormGroup.valid">Submit</button>
+            <div class="error" *ngIf="isControlInvalid('age')">
+              Age between 1 and 150!
+            </div>
+            <br/>
+            <label>*</label>
+            <label>
+              <input class="form-control" formControlName="star"/>
+            </label>
+            <div class="error" *ngIf="isControlInvalid('star')">
+              Only a star!
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary" (click)="eshkere()" [disabled]="!dadaFormGroup.valid">Submit</button>
           </form>
       </div>
     </div>
